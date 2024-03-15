@@ -155,6 +155,11 @@ export default function TipTapLink(props: TipTapLinkProps) {
             type="text"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setLink();
+              }
+            }}
             onBlur={validateUrl}
             onFocus={handleOnFocus}
             placeholder="https://example.com"
