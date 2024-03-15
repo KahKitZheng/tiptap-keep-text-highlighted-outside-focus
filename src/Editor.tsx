@@ -3,7 +3,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Highlight from "@tiptap/extension-highlight";
 import Link from "@tiptap/extension-link";
 import TipTapLink from "./TipTapLink";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 type TipTapEditorProps = {
   variant: "preview" | "editor";
@@ -14,8 +14,6 @@ type TipTapEditorProps = {
 
 export default function TipTapEditor(props: TipTapEditorProps) {
   const { isEditing = true, content, setContent } = props;
-
-  const [selectionRange, setSelectionRange] = useState({ start: 0, end: 0 });
 
   const readOnlyEditor = useEditor({
     content: content,
@@ -68,13 +66,7 @@ export default function TipTapEditor(props: TipTapEditorProps) {
   return (
     <div className="wrapper">
       <EditorContent editor={isEditing ? editOnlyEditor : readOnlyEditor} />
-      {isEditing && (
-        <TipTapLink
-          editor={editOnlyEditor}
-          selectionRange={selectionRange}
-          setSelectionRange={setSelectionRange}
-        />
-      )}
+      {isEditing && <TipTapLink editor={editOnlyEditor} />}
     </div>
   );
 }

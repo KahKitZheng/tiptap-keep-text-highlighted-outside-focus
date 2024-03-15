@@ -6,20 +6,10 @@ import "./TipTapLink.css";
 
 type TipTapLinkProps = {
   editor: Editor | null;
-  selectionRange: {
-    start: number;
-    end: number;
-  };
-  setSelectionRange: React.Dispatch<
-    React.SetStateAction<{
-      start: number;
-      end: number;
-    }>
-  >;
 };
 
 export default function TipTapLink(props: TipTapLinkProps) {
-  const { editor, selectionRange, setSelectionRange } = props;
+  const { editor } = props;
 
   const [url, setUrl] = useState("");
   const [isLinkSelected, setIsLinkSelected] = useState(false);
@@ -88,35 +78,9 @@ export default function TipTapLink(props: TipTapLinkProps) {
       return;
     }
 
-    const { from, to } = editor.state.selection;
-
     editor.commands.unsetHighlight();
-
-    // Save the selection range
-    setSelectionRange({ start: from, end: to });
     editor.commands.setHighlight();
-
-    // editor.commands.setTextSelection({
-    //   from: selectionRange.start,
-    //   to: selectionRange.end,
-    // });
   };
-
-  // useEffect(() => {
-  //   if (!editor) {
-  //     return;
-  //   }
-  //   editor.commands.setTextSelection({
-  //     from: selectionRange.start,
-  //     to: selectionRange.end,
-  //   });
-
-  //   editor.commands.unsetHighlight();
-
-  //   // const { from, to } = editor.state.selection;
-
-  //   // editor.commands.unsetHighlight();
-  // }, [editor, selectionRange.end, selectionRange.start]);
 
   // Fill input with selected link
   useEffect(() => {
